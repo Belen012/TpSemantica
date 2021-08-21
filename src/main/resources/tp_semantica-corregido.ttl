@@ -1,0 +1,860 @@
+@prefix : <http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix swrl: <http://www.w3.org/2003/11/swrl#> .
+@prefix swrla: <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#> .
+@prefix swrlb: <http://www.w3.org/2003/11/swrlb#> .
+@prefix mds-becas: <http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#> .
+@base <http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas> .
+
+<http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas> rdf:type owl:Ontology .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
+swrla:isRuleEnabled rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2000/01/rdf-schema#comment
+rdfs:comment rdfs:comment "Ontologia que representa los tipos de solicitudes de becas" .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#presentoSolicitud
+mds-becas:presentoSolicitud rdf:type owl:ObjectProperty ;
+                            rdfs:domain mds-becas:Postulante ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty mds-becas:presentoSolicitud ;
+                                          owl:someValuesFrom mds-becas:Solicitud
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty mds-becas:presentoSolicitud ;
+                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                          owl:onClass mds-becas:Solicitud
+                                        ] ;
+                            rdfs:range mds-becas:Solicitud ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty mds-becas:tienePostulante ;
+                                         owl:someValuesFrom mds-becas:Postulante
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty mds-becas:tienePostulante ;
+                                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                         owl:onClass mds-becas:Postulante
+                                       ] .
+
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#tienePostulante
+mds-becas:tienePostulante rdf:type owl:ObjectProperty ;
+                          rdfs:domain mds-becas:Solicitud ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty mds-becas:tienePostulante ;
+                                        owl:someValuesFrom mds-becas:Postulante
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty mds-becas:tienePostulante ;
+                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                        owl:onClass mds-becas:Postulante
+                                      ] ;
+                          rdfs:range mds-becas:Postulante ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty mds-becas:presentoSolicitud ;
+                                       owl:someValuesFrom mds-becas:Solicitud
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty mds-becas:presentoSolicitud ;
+                                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                       owl:onClass mds-becas:Solicitud
+                                     ] .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#cantidadHermanos
+mds-becas:cantidadHermanos rdf:type owl:DatatypeProperty ;
+                           rdfs:domain mds-becas:Solicitud ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty mds-becas:tienePostulante ;
+                                         owl:someValuesFrom mds-becas:Postulante
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty mds-becas:tienePostulante ;
+                                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                         owl:onClass mds-becas:Postulante
+                                       ] ;
+                           rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#diferenciaIngresoGasto
+mds-becas:diferenciaIngresoGasto rdf:type owl:DatatypeProperty ;
+                                 rdfs:domain mds-becas:Solicitud ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty mds-becas:tienePostulante ;
+                                               owl:someValuesFrom mds-becas:Postulante
+                                             ] ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty mds-becas:tienePostulante ;
+                                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                               owl:onClass mds-becas:Postulante
+                                             ] ;
+                                 rdfs:range xsd:float .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#GrupoFamiliar
+mds-becas:GrupoFamiliar rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#Postulante
+mds-becas:Postulante rdf:type owl:Class ;
+                     owl:equivalentClass [ rdf:type owl:Restriction ;
+                                           owl:onProperty mds-becas:presentoSolicitud ;
+                                           owl:someValuesFrom mds-becas:Solicitud
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty mds-becas:presentoSolicitud ;
+                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                           owl:onClass mds-becas:Solicitud
+                                         ] .
+
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#Solicitud
+mds-becas:Solicitud rdf:type owl:Class ;
+                    owl:equivalentClass [ rdf:type owl:Restriction ;
+                                          owl:onProperty mds-becas:tienePostulante ;
+                                          owl:someValuesFrom mds-becas:Postulante
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty mds-becas:tienePostulante ;
+                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                          owl:onClass mds-becas:Postulante
+                                        ] .
+
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#SolicitudBecaTotal
+mds-becas:SolicitudBecaTotal rdf:type owl:Class ;
+                             rdfs:subClassOf mds-becas:Solicitud .
+
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#SolicitudEnEstudio
+mds-becas:SolicitudEnEstudio rdf:type owl:Class ;
+                             rdfs:subClassOf mds-becas:Solicitud .
+
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#SolicitudMediaBeca
+mds-becas:SolicitudMediaBeca rdf:type owl:Class ;
+                             rdfs:subClassOf mds-becas:Solicitud .
+
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#SolicitudRechazada
+mds-becas:SolicitudRechazada rdf:type owl:Class ;
+                             rdfs:subClassOf mds-becas:Solicitud .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#Postulante
+mds-becas:Postulante rdf:type owl:NamedIndividual ,
+                              mds-becas:Postulante ,
+                              mds-becas:Solicitud ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty mds-becas:presentoSolicitud ;
+                                owl:someValuesFrom mds-becas:Solicitud
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty mds-becas:tienePostulante ;
+                                owl:someValuesFrom mds-becas:Postulante
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty mds-becas:presentoSolicitud ;
+                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                owl:onClass mds-becas:Solicitud
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty mds-becas:tienePostulante ;
+                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                owl:onClass mds-becas:Postulante
+                              ] .
+
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#PostulanteBecaTotal
+mds-becas:PostulanteBecaTotal rdf:type owl:NamedIndividual ,
+                                       mds-becas:Postulante ,
+                                       mds-becas:Solicitud ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty mds-becas:presentoSolicitud ;
+                                         owl:someValuesFrom mds-becas:Solicitud
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty mds-becas:tienePostulante ;
+                                         owl:someValuesFrom mds-becas:Postulante
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty mds-becas:presentoSolicitud ;
+                                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                         owl:onClass mds-becas:Solicitud
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty mds-becas:tienePostulante ;
+                                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                         owl:onClass mds-becas:Postulante
+                                       ] .
+
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#PostulanteEnEstudio
+mds-becas:PostulanteEnEstudio rdf:type owl:NamedIndividual ,
+                                       mds-becas:Postulante ,
+                                       mds-becas:Solicitud ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty mds-becas:presentoSolicitud ;
+                                         owl:someValuesFrom mds-becas:Solicitud
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty mds-becas:tienePostulante ;
+                                         owl:someValuesFrom mds-becas:Postulante
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty mds-becas:presentoSolicitud ;
+                                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                         owl:onClass mds-becas:Solicitud
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty mds-becas:tienePostulante ;
+                                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                         owl:onClass mds-becas:Postulante
+                                       ] .
+
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#PostulanteMediaBeca1
+mds-becas:PostulanteMediaBeca1 rdf:type owl:NamedIndividual ,
+                                        mds-becas:Postulante ,
+                                        mds-becas:Solicitud ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty mds-becas:presentoSolicitud ;
+                                          owl:someValuesFrom mds-becas:Solicitud
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty mds-becas:tienePostulante ;
+                                          owl:someValuesFrom mds-becas:Postulante
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty mds-becas:presentoSolicitud ;
+                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                          owl:onClass mds-becas:Solicitud
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty mds-becas:tienePostulante ;
+                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                          owl:onClass mds-becas:Postulante
+                                        ] .
+
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#PostulanteMediaBeca2
+mds-becas:PostulanteMediaBeca2 rdf:type owl:NamedIndividual ,
+                                        mds-becas:Postulante ,
+                                        mds-becas:Solicitud ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty mds-becas:presentoSolicitud ;
+                                          owl:someValuesFrom mds-becas:Solicitud
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty mds-becas:tienePostulante ;
+                                          owl:someValuesFrom mds-becas:Postulante
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty mds-becas:presentoSolicitud ;
+                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                          owl:onClass mds-becas:Solicitud
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty mds-becas:tienePostulante ;
+                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                          owl:onClass mds-becas:Postulante
+                                        ] .
+
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#PostulanteMediaBeca3
+mds-becas:PostulanteMediaBeca3 rdf:type owl:NamedIndividual ,
+                                        mds-becas:Postulante ,
+                                        mds-becas:Solicitud ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty mds-becas:presentoSolicitud ;
+                                          owl:someValuesFrom mds-becas:Solicitud
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty mds-becas:tienePostulante ;
+                                          owl:someValuesFrom mds-becas:Postulante
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty mds-becas:presentoSolicitud ;
+                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                          owl:onClass mds-becas:Solicitud
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty mds-becas:tienePostulante ;
+                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                          owl:onClass mds-becas:Postulante
+                                        ] .
+
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#PostulanteRechazado
+mds-becas:PostulanteRechazado rdf:type owl:NamedIndividual ,
+                                       mds-becas:Postulante ,
+                                       mds-becas:Solicitud ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty mds-becas:presentoSolicitud ;
+                                         owl:someValuesFrom mds-becas:Solicitud
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty mds-becas:tienePostulante ;
+                                         owl:someValuesFrom mds-becas:Postulante
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty mds-becas:presentoSolicitud ;
+                                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                         owl:onClass mds-becas:Solicitud
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty mds-becas:tienePostulante ;
+                                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                         owl:onClass mds-becas:Postulante
+                                       ] .
+
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#Solicitud
+mds-becas:Solicitud rdf:type owl:NamedIndividual ,
+                             mds-becas:Solicitud ,
+                             mds-becas:SolicitudBecaTotal ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty mds-becas:tienePostulante ;
+                               owl:someValuesFrom mds-becas:Postulante
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty mds-becas:tienePostulante ;
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass mds-becas:Postulante
+                             ] ;
+                    mds-becas:tienePostulante mds-becas:Postulante ;
+                    mds-becas:cantidadHermanos "2"^^xsd:int ;
+                    mds-becas:diferenciaIngresoGasto "40000.0"^^xsd:float .
+
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#SolicitudBecaTotal
+mds-becas:SolicitudBecaTotal rdf:type owl:NamedIndividual ,
+                                      mds-becas:Solicitud ,
+                                      mds-becas:SolicitudBecaTotal ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty mds-becas:tienePostulante ;
+                                        owl:someValuesFrom mds-becas:Postulante
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty mds-becas:tienePostulante ;
+                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                        owl:onClass mds-becas:Postulante
+                                      ] ;
+                             mds-becas:tienePostulante mds-becas:PostulanteBecaTotal ;
+                             mds-becas:cantidadHermanos "1"^^xsd:int ;
+                             mds-becas:diferenciaIngresoGasto "40000.0"^^xsd:float .
+
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#SolicitudEnEstudio
+mds-becas:SolicitudEnEstudio rdf:type owl:NamedIndividual ,
+                                      mds-becas:Solicitud ,
+                                      mds-becas:SolicitudEnEstudio ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty mds-becas:tienePostulante ;
+                                        owl:someValuesFrom mds-becas:Postulante
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty mds-becas:tienePostulante ;
+                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                        owl:onClass mds-becas:Postulante
+                                      ] ;
+                             mds-becas:tienePostulante mds-becas:PostulanteEnEstudio ;
+                             mds-becas:cantidadHermanos "2"^^xsd:int ;
+                             mds-becas:diferenciaIngresoGasto "-40000.0"^^xsd:float .
+
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#SolicitudMediaBeca2
+mds-becas:SolicitudMediaBeca2 rdf:type owl:NamedIndividual ,
+                                       mds-becas:Solicitud ,
+                                       mds-becas:SolicitudMediaBeca ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty mds-becas:tienePostulante ;
+                                         owl:someValuesFrom mds-becas:Postulante
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty mds-becas:tienePostulante ;
+                                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                         owl:onClass mds-becas:Postulante
+                                       ] ;
+                              mds-becas:tienePostulante mds-becas:PostulanteMediaBeca2 ;
+                              mds-becas:cantidadHermanos "4"^^xsd:int ;
+                              mds-becas:diferenciaIngresoGasto "70000.0"^^xsd:float .
+
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#SolicitudMediaBeca3
+mds-becas:SolicitudMediaBeca3 rdf:type owl:NamedIndividual ,
+                                       mds-becas:Solicitud ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty mds-becas:tienePostulante ;
+                                         owl:someValuesFrom mds-becas:Postulante
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty mds-becas:tienePostulante ;
+                                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                         owl:onClass mds-becas:Postulante
+                                       ] ;
+                              mds-becas:tienePostulante mds-becas:PostulanteMediaBeca3 ;
+                              mds-becas:cantidadHermanos "2"^^xsd:int ;
+                              mds-becas:diferenciaIngresoGasto "55000.0"^^xsd:float .
+
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#SolicitudMediaBecal1
+mds-becas:SolicitudMediaBecal1 rdf:type owl:NamedIndividual ,
+                                        mds-becas:Solicitud ,
+                                        mds-becas:SolicitudMediaBeca ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty mds-becas:tienePostulante ;
+                                          owl:someValuesFrom mds-becas:Postulante
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty mds-becas:tienePostulante ;
+                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                          owl:onClass mds-becas:Postulante
+                                        ] ;
+                               mds-becas:tienePostulante mds-becas:PostulanteMediaBeca1 ;
+                               mds-becas:cantidadHermanos "0"^^xsd:int ;
+                               mds-becas:diferenciaIngresoGasto "40000.0"^^xsd:float .
+
+
+###  http://www.semanticweb.org/fiorella/ontologies/2021/6/mds-becas#SolicitudRechazada
+mds-becas:SolicitudRechazada rdf:type owl:NamedIndividual ,
+                                      mds-becas:Solicitud ,
+                                      mds-becas:SolicitudRechazada ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty mds-becas:tienePostulante ;
+                                        owl:someValuesFrom mds-becas:Postulante
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty mds-becas:tienePostulante ;
+                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                        owl:onClass mds-becas:Postulante
+                                      ] ;
+                             mds-becas:tienePostulante mds-becas:PostulanteRechazado ;
+                             mds-becas:cantidadHermanos "2"^^xsd:int ;
+                             mds-becas:diferenciaIngresoGasto "70000.0"^^xsd:float .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+mds-becas:Solicitud rdfs:comment "Identifica las solicitudes de la beca" .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty mds-becas:presentoSolicitud ;
+  owl:someValuesFrom mds-becas:Solicitud ;
+  owl:equivalentClass [ rdf:type owl:Restriction ;
+                        owl:onProperty mds-becas:presentoSolicitud ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onClass mds-becas:Solicitud
+                      ]
+] .
+
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty mds-becas:tienePostulante ;
+  owl:someValuesFrom mds-becas:Postulante ;
+  owl:equivalentClass [ rdf:type owl:Restriction ;
+                        owl:onProperty mds-becas:tienePostulante ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onClass mds-becas:Postulante
+                      ]
+] .
+
+
+#################################################################
+#    Rules
+#################################################################
+
+mds-becas:x rdf:type swrl:Variable .
+
+mds-becas:y rdf:type swrl:Variable .
+
+mds-becas:h rdf:type swrl:Variable .
+
+[ swrla:isRuleEnabled "true"^^xsd:boolean ;
+   rdfs:comment ""^^xsd:string ;
+   rdfs:label "SolicitudEnEstudio"^^xsd:string ;
+   rdf:type swrl:Imp ;
+   swrl:body [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate mds-becas:Solicitud ;
+                           swrl:argument1 mds-becas:x
+                         ] ;
+               rdf:rest [ rdf:type swrl:AtomList ;
+                          rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
+                                      swrl:propertyPredicate mds-becas:diferenciaIngresoGasto ;
+                                      swrl:argument1 mds-becas:x ;
+                                      swrl:argument2 mds-becas:y
+                                    ] ;
+                          rdf:rest [ rdf:type swrl:AtomList ;
+                                     rdf:first [ rdf:type swrl:BuiltinAtom ;
+                                                 swrl:builtin swrlb:lessThan ;
+                                                 swrl:arguments [ rdf:type rdf:List ;
+                                                                  rdf:first mds-becas:y ;
+                                                                  rdf:rest [ rdf:type rdf:List ;
+                                                                             rdf:first 1 ;
+                                                                             rdf:rest rdf:nil
+                                                                           ]
+                                                                ]
+                                               ] ;
+                                     rdf:rest rdf:nil
+                                   ]
+                        ]
+             ] ;
+   swrl:head [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate mds-becas:SolicitudEnEstudio ;
+                           swrl:argument1 mds-becas:x
+                         ] ;
+               rdf:rest rdf:nil
+             ]
+ ] .
+
+[ swrla:isRuleEnabled "true"^^xsd:boolean ;
+   rdfs:comment ""^^xsd:string ;
+   rdfs:label "SolicitudMediaBeca1"^^xsd:string ;
+   rdf:type swrl:Imp ;
+   swrl:body [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate mds-becas:Solicitud ;
+                           swrl:argument1 mds-becas:x
+                         ] ;
+               rdf:rest [ rdf:type swrl:AtomList ;
+                          rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
+                                      swrl:propertyPredicate mds-becas:diferenciaIngresoGasto ;
+                                      swrl:argument1 mds-becas:x ;
+                                      swrl:argument2 mds-becas:y
+                                    ] ;
+                          rdf:rest [ rdf:type swrl:AtomList ;
+                                     rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
+                                                 swrl:propertyPredicate mds-becas:cantidadHermanos ;
+                                                 swrl:argument1 mds-becas:x ;
+                                                 swrl:argument2 mds-becas:h
+                                               ] ;
+                                     rdf:rest [ rdf:type swrl:AtomList ;
+                                                rdf:first [ rdf:type swrl:BuiltinAtom ;
+                                                            swrl:builtin swrlb:lessThan ;
+                                                            swrl:arguments [ rdf:type rdf:List ;
+                                                                             rdf:first mds-becas:y ;
+                                                                             rdf:rest [ rdf:type rdf:List ;
+                                                                                        rdf:first 50000.0 ;
+                                                                                        rdf:rest rdf:nil
+                                                                                      ]
+                                                                           ]
+                                                          ] ;
+                                                rdf:rest [ rdf:type swrl:AtomList ;
+                                                           rdf:first [ rdf:type swrl:BuiltinAtom ;
+                                                                       swrl:builtin swrlb:equal ;
+                                                                       swrl:arguments [ rdf:type rdf:List ;
+                                                                                        rdf:first mds-becas:h ;
+                                                                                        rdf:rest [ rdf:type rdf:List ;
+                                                                                                   rdf:first 0 ;
+                                                                                                   rdf:rest rdf:nil
+                                                                                                 ]
+                                                                                      ]
+                                                                     ] ;
+                                                           rdf:rest rdf:nil
+                                                         ]
+                                              ]
+                                   ]
+                        ]
+             ] ;
+   swrl:head [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate mds-becas:SolicitudMediaBeca ;
+                           swrl:argument1 mds-becas:x
+                         ] ;
+               rdf:rest rdf:nil
+             ]
+ ] .
+
+[ swrla:isRuleEnabled "true"^^xsd:boolean ;
+   rdfs:comment ""^^xsd:string ;
+   rdfs:label "SolicitudTotal"^^xsd:string ;
+   rdf:type swrl:Imp ;
+   swrl:body [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
+                           swrl:propertyPredicate mds-becas:diferenciaIngresoGasto ;
+                           swrl:argument1 mds-becas:x ;
+                           swrl:argument2 mds-becas:y
+                         ] ;
+               rdf:rest [ rdf:type swrl:AtomList ;
+                          rdf:first [ rdf:type swrl:BuiltinAtom ;
+                                      swrl:builtin swrlb:greaterThan ;
+                                      swrl:arguments [ rdf:type rdf:List ;
+                                                       rdf:first mds-becas:h ;
+                                                       rdf:rest [ rdf:type rdf:List ;
+                                                                  rdf:first 0 ;
+                                                                  rdf:rest rdf:nil
+                                                                ]
+                                                     ]
+                                    ] ;
+                          rdf:rest [ rdf:type swrl:AtomList ;
+                                     rdf:first [ rdf:type swrl:BuiltinAtom ;
+                                                 swrl:builtin swrlb:greaterThan ;
+                                                 swrl:arguments [ rdf:type rdf:List ;
+                                                                  rdf:first mds-becas:y ;
+                                                                  rdf:rest [ rdf:type rdf:List ;
+                                                                             rdf:first 0 ;
+                                                                             rdf:rest rdf:nil
+                                                                           ]
+                                                                ]
+                                               ] ;
+                                     rdf:rest [ rdf:type swrl:AtomList ;
+                                                rdf:first [ rdf:type swrl:ClassAtom ;
+                                                            swrl:classPredicate mds-becas:Solicitud ;
+                                                            swrl:argument1 mds-becas:x
+                                                          ] ;
+                                                rdf:rest [ rdf:type swrl:AtomList ;
+                                                           rdf:first [ rdf:type swrl:BuiltinAtom ;
+                                                                       swrl:builtin swrlb:lessThan ;
+                                                                       swrl:arguments [ rdf:type rdf:List ;
+                                                                                        rdf:first mds-becas:y ;
+                                                                                        rdf:rest [ rdf:type rdf:List ;
+                                                                                                   rdf:first 50000.0 ;
+                                                                                                   rdf:rest rdf:nil
+                                                                                                 ]
+                                                                                      ]
+                                                                     ] ;
+                                                           rdf:rest [ rdf:type swrl:AtomList ;
+                                                                      rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
+                                                                                  swrl:propertyPredicate mds-becas:cantidadHermanos ;
+                                                                                  swrl:argument1 mds-becas:x ;
+                                                                                  swrl:argument2 mds-becas:h
+                                                                                ] ;
+                                                                      rdf:rest rdf:nil
+                                                                    ]
+                                                         ]
+                                              ]
+                                   ]
+                        ]
+             ] ;
+   swrl:head [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate mds-becas:SolicitudBecaTotal ;
+                           swrl:argument1 mds-becas:x
+                         ] ;
+               rdf:rest rdf:nil
+             ]
+ ] .
+
+[ swrla:isRuleEnabled "true"^^xsd:boolean ;
+   rdfs:comment ""^^xsd:string ;
+   rdfs:label "SolicitudMediaBeca2"^^xsd:string ;
+   rdf:type swrl:Imp ;
+   swrl:body [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate mds-becas:Solicitud ;
+                           swrl:argument1 mds-becas:x
+                         ] ;
+               rdf:rest [ rdf:type swrl:AtomList ;
+                          rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
+                                      swrl:propertyPredicate mds-becas:diferenciaIngresoGasto ;
+                                      swrl:argument1 mds-becas:x ;
+                                      swrl:argument2 mds-becas:y
+                                    ] ;
+                          rdf:rest [ rdf:type swrl:AtomList ;
+                                     rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
+                                                 swrl:propertyPredicate mds-becas:cantidadHermanos ;
+                                                 swrl:argument1 mds-becas:x ;
+                                                 swrl:argument2 mds-becas:h
+                                               ] ;
+                                     rdf:rest [ rdf:type swrl:AtomList ;
+                                                rdf:first [ rdf:type swrl:BuiltinAtom ;
+                                                            swrl:builtin swrlb:greaterThan ;
+                                                            swrl:arguments [ rdf:type rdf:List ;
+                                                                             rdf:first mds-becas:y ;
+                                                                             rdf:rest [ rdf:type rdf:List ;
+                                                                                        rdf:first 60000.0 ;
+                                                                                        rdf:rest rdf:nil
+                                                                                      ]
+                                                                           ]
+                                                          ] ;
+                                                rdf:rest [ rdf:type swrl:AtomList ;
+                                                           rdf:first [ rdf:type swrl:BuiltinAtom ;
+                                                                       swrl:builtin swrlb:greaterThan ;
+                                                                       swrl:arguments [ rdf:type rdf:List ;
+                                                                                        rdf:first mds-becas:h ;
+                                                                                        rdf:rest [ rdf:type rdf:List ;
+                                                                                                   rdf:first 3 ;
+                                                                                                   rdf:rest rdf:nil
+                                                                                                 ]
+                                                                                      ]
+                                                                     ] ;
+                                                           rdf:rest rdf:nil
+                                                         ]
+                                              ]
+                                   ]
+                        ]
+             ] ;
+   swrl:head [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate mds-becas:SolicitudMediaBeca ;
+                           swrl:argument1 mds-becas:x
+                         ] ;
+               rdf:rest rdf:nil
+             ]
+ ] .
+
+[ swrla:isRuleEnabled "true"^^xsd:boolean ;
+   rdfs:comment ""^^xsd:string ;
+   rdfs:label "SolicitudMediaBeca3"^^xsd:string ;
+   rdf:type swrl:Imp ;
+   swrl:body [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate mds-becas:Solicitud ;
+                           swrl:argument1 mds-becas:x
+                         ] ;
+               rdf:rest [ rdf:type swrl:AtomList ;
+                          rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
+                                      swrl:propertyPredicate mds-becas:diferenciaIngresoGasto ;
+                                      swrl:argument1 mds-becas:x ;
+                                      swrl:argument2 mds-becas:y
+                                    ] ;
+                          rdf:rest [ rdf:type swrl:AtomList ;
+                                     rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
+                                                 swrl:propertyPredicate mds-becas:cantidadHermanos ;
+                                                 swrl:argument1 mds-becas:x ;
+                                                 swrl:argument2 mds-becas:h
+                                               ] ;
+                                     rdf:rest [ rdf:type swrl:AtomList ;
+                                                rdf:first [ rdf:type swrl:BuiltinAtom ;
+                                                            swrl:builtin swrlb:greaterThan ;
+                                                            swrl:arguments [ rdf:type rdf:List ;
+                                                                             rdf:first mds-becas:y ;
+                                                                             rdf:rest [ rdf:type rdf:List ;
+                                                                                        rdf:first 50000.0 ;
+                                                                                        rdf:rest rdf:nil
+                                                                                      ]
+                                                                           ]
+                                                          ] ;
+                                                rdf:rest [ rdf:type swrl:AtomList ;
+                                                           rdf:first [ rdf:type swrl:BuiltinAtom ;
+                                                                       swrl:builtin swrlb:lessThan ;
+                                                                       swrl:arguments [ rdf:type rdf:List ;
+                                                                                        rdf:first mds-becas:y ;
+                                                                                        rdf:rest [ rdf:type rdf:List ;
+                                                                                                   rdf:first 60000.0 ;
+                                                                                                   rdf:rest rdf:nil
+                                                                                                 ]
+                                                                                      ]
+                                                                     ] ;
+                                                           rdf:rest [ rdf:type swrl:AtomList ;
+                                                                      rdf:first [ rdf:type swrl:BuiltinAtom ;
+                                                                                  swrl:builtin swrlb:lessThan ;
+                                                                                  swrl:arguments [ rdf:type rdf:List ;
+                                                                                                   rdf:first mds-becas:h ;
+                                                                                                   rdf:rest [ rdf:type rdf:List ;
+                                                                                                              rdf:first 3 ;
+                                                                                                              rdf:rest rdf:nil
+                                                                                                            ]
+                                                                                                 ]
+                                                                                ] ;
+                                                                      rdf:rest rdf:nil
+                                                                    ]
+                                                         ]
+                                              ]
+                                   ]
+                        ]
+             ] ;
+   swrl:head [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate mds-becas:SolicitudMediaBeca ;
+                           swrl:argument1 mds-becas:x
+                         ] ;
+               rdf:rest rdf:nil
+             ]
+ ] .
+
+[ swrla:isRuleEnabled "true"^^xsd:boolean ;
+   rdfs:comment ""^^xsd:string ;
+   rdfs:label "SolicitudRechazada"^^xsd:string ;
+   rdf:type swrl:Imp ;
+   swrl:body [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate mds-becas:Solicitud ;
+                           swrl:argument1 mds-becas:x
+                         ] ;
+               rdf:rest [ rdf:type swrl:AtomList ;
+                          rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
+                                      swrl:propertyPredicate mds-becas:diferenciaIngresoGasto ;
+                                      swrl:argument1 mds-becas:x ;
+                                      swrl:argument2 mds-becas:y
+                                    ] ;
+                          rdf:rest [ rdf:type swrl:AtomList ;
+                                     rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
+                                                 swrl:propertyPredicate mds-becas:cantidadHermanos ;
+                                                 swrl:argument1 mds-becas:x ;
+                                                 swrl:argument2 mds-becas:h
+                                               ] ;
+                                     rdf:rest [ rdf:type swrl:AtomList ;
+                                                rdf:first [ rdf:type swrl:BuiltinAtom ;
+                                                            swrl:builtin swrlb:greaterThan ;
+                                                            swrl:arguments [ rdf:type rdf:List ;
+                                                                             rdf:first mds-becas:y ;
+                                                                             rdf:rest [ rdf:type rdf:List ;
+                                                                                        rdf:first 60000.0 ;
+                                                                                        rdf:rest rdf:nil
+                                                                                      ]
+                                                                           ]
+                                                          ] ;
+                                                rdf:rest [ rdf:type swrl:AtomList ;
+                                                           rdf:first [ rdf:type swrl:BuiltinAtom ;
+                                                                       swrl:builtin swrlb:lessThan ;
+                                                                       swrl:arguments [ rdf:type rdf:List ;
+                                                                                        rdf:first mds-becas:h ;
+                                                                                        rdf:rest [ rdf:type rdf:List ;
+                                                                                                   rdf:first 3 ;
+                                                                                                   rdf:rest rdf:nil
+                                                                                                 ]
+                                                                                      ]
+                                                                     ] ;
+                                                           rdf:rest rdf:nil
+                                                         ]
+                                              ]
+                                   ]
+                        ]
+             ] ;
+   swrl:head [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate mds-becas:SolicitudRechazada ;
+                           swrl:argument1 mds-becas:x
+                         ] ;
+               rdf:rest rdf:nil
+             ]
+ ] .
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
