@@ -1,28 +1,12 @@
-# GraphDB Java Example
-The GraphDB Java example show how you can use Java code to connect to a GraphDB server, manage GraphDB databases and query them with native library.
-All GraphDB programming examples are provided as a Maven project.
+# Trabajo practico de la materia Modelo Semantico de Datos
 
-## Index
-- [About project](#about-project)
-- [Prerequisites to run](#prerequisites-to-run)
-- [Running the example](#running-the-example)
+Se realizó la ontologia en Protege.
 
-## About project
-This example project demonstrates how to connect to a GraphDB server using [RDF4J Java framework](https://rdf4j.org/javadoc/latest/) and execute queries using SPARQL.
-This example is provided by the application when we download it.
+Luego se procedió a conectar la ontologia con la base de datos de GraphDB.
 
-## Prerequisites to run
+Para finalmente conectar la base de datos a éste proyecto.
 
-* Java development environment (e.g., IntelliJ IDEA, etc.)
-
-## Running the example
-
-In this repository have tow examples: 
-- [HelloWorld](src/main/java/com/ontotext/graphdb/example/app/hello/HelloWorld.java)
-- [FamilyRelationsApp](src/main/java/com/ontotext/graphdb/example/app/semantica/FamilyRelationsApp.java)
-
-> To run any of these examples, run the main method.
-
-These examples use an embedded database, but you can replace it with a remote one. To do this you need to download and install some version of GraphDB (Docker, desktop etc), to download this go to [graphdb site](https://graphdb.ontotext.com/).
-
-For more information you can show the [GraphDB Quick Start Guide](https://graphdb.ontotext.com/documentation/free/quick-start-guide.html).
+## Integrantes
+* Eceiza Belen Elizabeth
+* Martinez Eira Micaela
+* Triverio Fiorella 
